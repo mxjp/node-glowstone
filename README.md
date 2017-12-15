@@ -10,10 +10,19 @@ Easily persist json objects!
 npm install glowstone
 ```
 
-## Usage
+## Quick Start
 ```js
 const glowstone = require('glowstone');
+
+// Load an existing object or create an empty one:
+const data = await glowstone('data.json');
+
+// Set some properties:
+data.message = 'Hello World!';
+// The object will write itself to disk asynchronously when changes are made.
 ```
+
+## API
 
 ### Loading objects
 ```js
