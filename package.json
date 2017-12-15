@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "Easily persist json objects!",
 	"main": "index.js",
+	"repository": "github:mpt0/node-glowstone",
 	"author": "Max J. Polster",
 	"license": "MIT",
 	"scripts": {
