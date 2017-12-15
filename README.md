@@ -1,7 +1,7 @@
 # glowstone
 [![npm](https://img.shields.io/npm/v/glowstone.svg?style=flat-square)]()
 [![npm](https://img.shields.io/npm/l/glowstone.svg?style=flat-square)]()
-[![Travis](https://img.shields.io/travis/mpt0/glowstone.svg?style=flat-square)]()
+[![Travis](https://img.shields.io/travis/mpt0/node-glowstone.svg?style=flat-square)]()
 
 Easily persist json objects!
 
