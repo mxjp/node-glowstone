@@ -21,9 +21,18 @@ const obj = await glowstone('example.json', {
 	// Default options:
 	watch: true,
 	encoding: 'utf8',
-	defaultValue: {}
+	defaultValue: {},
+	parse: JSON.parse,
+	stringify: JSON.stringify,
+	rejectOnParseError: true
 });
 ```
++ watch `<Boolean>` - True to write the object to disk when it has been changed.
++ encoding `<String>` - The encoding for reading &amp; writing serialized data.
++ defaultValue `<Object>` - The object to use when the file could not be read.
++ parse `<Function>` - The function to parse json data from disk.
++ stringify `<Function>` - The function to stringify the object when writing to disk.
++ rejectOnParseError `<Boolean>` - True to reject when an error occurs while loading json data from disk.
 
 ### Saving objects
 If watch was set to `true` the object will write itself to disk if something changes.

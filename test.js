@@ -50,3 +50,17 @@ test('Watch', t => tmpdir(async dirname => {
 	await new Promise(resolve => setTimeout(resolve, 100));
 	t.false('nested' in (await glowstone(filename)));
 }));
+
+test('Custom serialization', t => tmpdir(async dirname => {
+	const filename = path.join(dirname, 'test.json');
+	const options = {
+		stringify: obj => obj.value,
+		parse: value => ({value})
+	};
+
+	const obj = await glowstone(filename, options);
+	obj.value = 'text';
+	await glowstone(obj).write();
+	t.is(await fs.readFile(filename, 'utf8'), 'text');
+	t.is((await glowstone(filename, options)).value, 'text');
+}));

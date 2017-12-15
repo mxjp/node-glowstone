@@ -15,7 +15,10 @@ module.exports = (objOrFilename, options) => {
 function load(filename, {
 	encoding = 'utf8',
 	watch = true,
-	defaultValue = {}
+	defaultValue = {},
+	parse = JSON.parse,
+	stringify = JSON.stringify,
+	rejectOnParseError = true
 } = {}) {
 	if (typeof defaultValue !== 'object') {
 		throw new TypeError('defaultValue must be an object.');
@@ -36,7 +39,7 @@ function load(filename, {
 		do {
 			writeRepeat = false;
 			await new Promise((resolve, reject) => {
-				fs.writeFile(filename, JSON.stringify(root), encoding, err => {
+				fs.writeFile(filename, stringify(root), encoding, err => {
 					if (err) {
 						reject(err);
 					} else {
@@ -83,14 +86,34 @@ function load(filename, {
 		return value;
 	}
 
-	return new Promise(resolve => {
+	return new Promise((resolve, reject) => {
 		fs.readFile(filename, encoding, (err, json) => {
-			if (err) {
-				json = JSON.stringify(defaultValue);
+			function resolveRoot(value) {
+				root = value;
+				root[CONTEXT] = context;
+				resolve(wrap(root));
 			}
-			root = JSON.parse(json);
-			root[CONTEXT] = context;
-			resolve(wrap(root));
+			function createDefaultValue() {
+				try {
+					resolveRoot(parse(stringify(defaultValue)));
+				} catch (err) {
+					reject(err);
+				}
+			}
+
+			if (err) {
+				createDefaultValue();
+			} else {
+				try {
+					resolveRoot(parse(json));
+				} catch (err) {
+					if (rejectOnParseError) {
+						reject(err);
+					} else {
+						createDefaultValue();
+					}
+				}
+			}
 		});
 	});
 }
