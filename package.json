@@ -1,0 +1,23 @@
+{
+	"name": "glowstone",
+	"version": "1.0.0",
+	"description": "Easily persist json objects!",
+	"main": "index.js",
+	"author": "Max J. Polster",
+	"license": "MIT",
+	"scripts": {
+		"test": "xo && ava",
+		"dev": "ava --watch --verbose"
+	},
+	"devDependencies": {
+		"ava": "^0.24.0",
+		"fs-extra": "^5.0.0",
+		"tmp": "0.0.33",
+		"xo": "^0.18.2"
+	},
+	"xo": {
+		"rules": {
+			"no-await-in-loop": 0
+		}
+	}
+}
