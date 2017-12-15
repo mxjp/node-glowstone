@@ -1,6 +1,6 @@
 {
 	"name": "glowstone",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Easily persist json objects!",
 	"main": "index.js",
 	"repository": "github:mpt0/node-glowstone",
